@@ -1,0 +1,19 @@
+{
+    "name": "prodikl/mocktation",
+    "description": "PHP Mocking using annotations",
+    "autoload" : {
+        "psr-4": {
+            "" : "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Keith Larson",
+            "email": "keith.larson@flashtalking.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    }
+}
