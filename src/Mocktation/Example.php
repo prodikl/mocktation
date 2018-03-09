@@ -13,7 +13,6 @@ class Example {
      * Accepts an int $num and returns it
      *
      * @param $num      int     The num to return
-     *
      * @return int      The example num
      *
      * @mockReturn      5
