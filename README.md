@@ -11,6 +11,8 @@ PHP Mocking using annotations
 2. Extend `Mocktation/Testcase` instead of PHPUnit TestCases
 
     ```php
+    use Mocktation\TestCase;
+    
     class ExampleTest extends TestCase {
         public function testGetNum(){
             /** @var Example|MockObject $mock */
@@ -40,5 +42,5 @@ PHP Mocking using annotations
     
 Here's a list of Mocktation annotations
 
-- @mockReturn [returnValue] - Returns the [returnValue] when called
-- @mockReturnArgument [argumentNumber] - Returns the [argumentNumber] when called
+- `@mockReturn [returnValue]` - Returns the [returnValue] when called
+- `@mockReturnArgument [argumentNumber]` - Returns the [argumentNumber] when called
