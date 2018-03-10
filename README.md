@@ -4,13 +4,13 @@ PHP Mocking using annotations
 
 1. Install Mocktation
 
-    ```
+    ```bash
     composer require-dev prodikl/mocktation
     ```
         
 2. Extend `Mocktation/Testcase` instead of PHPUnit TestCases
 
-    ```
+    ```php
     class ExampleTest extends TestCase {
         public function testGetNum(){
             /** @var Example|MockObject $mock */
@@ -22,7 +22,7 @@ PHP Mocking using annotations
     
 3. Use annotations to describe mocking in your methods
 
-    ```
+    ```php
     class Example {
         /**
          * Accepts an int $num and returns it
