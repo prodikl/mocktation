@@ -15,7 +15,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase {
 
+    const MOCK_RETURN = "@mockReturn";
+    const MOCK_RETURN_ARGUMENT = "@mockReturnArgument";
+
     /**
+     * Returns a test double for the specified class.
+     *
      * @param string $originalClassName
      *
      * @return \PHPUnit\Framework\MockObject\MockObject
@@ -29,6 +34,8 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase {
     }
 
     /**
+     * Looks through all the method comments for the given class and checks for @mock methods
+     *
      * @param $mock                 MockObject      The mock
      * @param $originalClassName    string          The class name
      *
@@ -43,6 +50,8 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase {
     }
 
     /**
+     * Looks through each line of the docBlock for a method and looks for @mock annotations.
+     *
      * @param $mock         MockObject          The mock object
      * @param $method       \ReflectionMethod   The ReflectionMethod
      */
@@ -59,18 +68,23 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase {
     }
 
     /**
+     * Applies the logic for each @mock annotation found
+     *
      * @param MockObject        $mock
      * @param \ReflectionMethod $method
      * @param array             $matches
      */
     private function addMockedMethod(MockObject $mock, \ReflectionMethod $method, array $matches) {
-        $fullLine = $matches[0];        // @mockReturn     5
-        $mockMethod = $matches[1];      // @mockReturn
-        $mockValue = $matches[2];       // 5
+        $fullLine = $matches[0];        // e.g.     @mockReturn     5
+        $mockMethod = $matches[1];      // e.g.     @mockReturn
+        $mockValue = $matches[2];       // e.g.     5
 
         switch($mockMethod){
-            case "@mockReturn":
+            case static::MOCK_RETURN:
                 $mock->method($method->name)->willReturn($mockValue);
+                break;
+            case static::MOCK_RETURN_ARGUMENT:
+                $mock->method($method->name)->willReturnArgument($mockValue);
                 break;
         }
     }
