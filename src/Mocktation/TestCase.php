@@ -15,7 +15,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase {
 
-    const MOCK_RETURN = "@mockReturn";
+    const MOCK_RETURN_VALUE = "@mockReturn";
     const MOCK_RETURN_ARGUMENT = "@mockReturnArgument";
 
     /**
@@ -80,12 +80,13 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase {
         $mockValue = $matches[2];       // e.g.     5
 
         switch($mockMethod){
-            case static::MOCK_RETURN:
-                $mock->method($method->name)->willReturn($mockValue);
+            case static::MOCK_RETURN_VALUE:
+                $mock->method($method->name)->willReturn(eval("return " . $mockValue . ';'));
                 break;
             case static::MOCK_RETURN_ARGUMENT:
-                $mock->method($method->name)->willReturnArgument($mockValue);
+                $mock->method($method->name)->willReturnArgument((int) $mockValue);
                 break;
+
         }
     }
 }

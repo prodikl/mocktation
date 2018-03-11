@@ -3,7 +3,8 @@
     "description": "PHP Mocking using annotations",
     "autoload" : {
         "psr-4": {
-            "" : "src/"
+            "" : "src/",
+            "tests\\" : "tests/"
         }
     },
     "authors": [

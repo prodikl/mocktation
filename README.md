@@ -43,4 +43,4 @@ PHP Mocking using annotations
 Here's a list of Mocktation annotations
 
 - `@mockReturn [returnValue]` - Returns the [returnValue] when called
-- `@mockReturnArgument [argumentNumber]` - Returns the [argumentNumber] when called
+- `@mockReturnArgument [argumentNumber]` - Returns the [argumentNumber] when called. [argumentNumber] starts from 0.
