@@ -1,6 +1,7 @@
 # Mocktation
 PHP Mocking using annotations
 
+[![Build Status](https://travis-ci.org/prodikl/mocktation.svg?branch=master)](https://travis-ci.org/prodikl/mocktation)
 
 1. Install Mocktation
 
