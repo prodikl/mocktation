@@ -13,8 +13,8 @@
             "email": "keith.larson@flashtalking.com"
         }
     ],
-    "require": {},
-    "require-dev": {
+    "require": {
         "phpunit/phpunit": "^6.5"
-    }
+    },
+    "require-dev": { }
 }
