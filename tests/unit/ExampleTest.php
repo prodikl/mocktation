@@ -35,4 +35,9 @@ class ExampleTest extends TestCase {
     public function testGetArgs(){
         $this->assertEquals(2, $this->mock->getArgs(1,2,3));
     }
+
+    public function testOverridable(){
+        $this->mock->method("getNum")->willReturn(200);
+        $this->assertEquals(200, $this->mock->getNum(1));
+    }
 }
