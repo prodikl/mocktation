@@ -3,7 +3,8 @@
     "description": "PHP Mocking using annotations",
     "autoload" : {
         "psr-4": {
-            "" : "src/"
+            "" : "src/",
+            "tests\\" : "tests/"
         }
     },
     "authors": [
@@ -12,8 +13,9 @@
             "email": "keith.larson@flashtalking.com"
         }
     ],
-    "require": {},
-    "require-dev": {
+    "require": {
         "phpunit/phpunit": "^6.5"
-    }
+    },
+    "require-dev": { },
+    "license" : "MIT"
 }

@@ -1,8 +1,6 @@
 <?php
 
-namespace test;
-
-use Mocktation\Example;
+use tests\Example;
 use Mocktation\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -14,9 +12,27 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 
 class ExampleTest extends TestCase {
-    public function testGetNum(){
+    /** @var Example|MockObject */
+    protected $mock;
+
+    public function setUp() {
         /** @var Example|MockObject $mock */
-        $mock = $this->createMock(Example::class);
-        $this->assertEquals(5, $mock->getNum(234));
+        $this->mock = $this->createMock(Example::class);
+    }
+
+    public function testGetNum(){
+        $this->assertEquals(5, $this->mock->getNum(234));
+    }
+
+    public function testArray(){
+        $this->assertEquals(['test'], $this->mock->getArray());
+    }
+
+    public function testObject(){
+        $this->assertEquals(new stdClass(), $this->mock->getObject());
+    }
+
+    public function testGetArgs(){
+        $this->assertEquals(2, $this->mock->getArgs(1,2,3));
     }
 }
