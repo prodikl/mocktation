@@ -21,15 +21,17 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase {
     /**
      * Returns a test double for the specified class.
      *
-     * @param string $originalClassName
+     * @param string $originalClassName         The class name to mock
+     * @param bool   $fresh                     If TRUE, ignore annotations and return fresh mock
      *
      * @return \PHPUnit\Framework\MockObject\MockObject
-     *
      * @throws \ReflectionException
      */
-    public function createMock($originalClassName) {
+    public function createMock($originalClassName, bool $fresh = false) {
         $mock = parent::createMock($originalClassName);
-        $this->addMockedMethods($mock, $originalClassName);
+        if($fresh == false) {
+            $this->addMockedMethods($mock, $originalClassName);
+        }
         return $mock;
     }
 
@@ -81,12 +83,33 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase {
 
         switch($mockMethod){
             case static::MOCK_RETURN_VALUE:
-                $mock->method($method->name)->willReturn(eval("return " . $mockValue . ';'));
+                //$mock->method($method->name)->willReturn(eval("return " . $mockValue . ';'));
+                $expects = $mock->expects(
+                    $this->weakly($mock)
+                    //static::any()
+                );
+                $method = $expects->method($method->name);
+                $method->will(
+                        static::returnValue(
+                            eval("return " . $mockValue . ';')));
                 break;
             case static::MOCK_RETURN_ARGUMENT:
                 $mock->method($method->name)->willReturnArgument((int) $mockValue);
                 break;
 
         }
+    }
+
+    /**
+     * Returns a matcher that matches when the method is executed
+     * zero or more times.
+     *
+     * @param MockObject $mock
+     *
+     * @return WeaklyMatcher
+     */
+    public static function weakly(MockObject $mock)
+    {
+        return new WeaklyMatcher($mock);
     }
 }
