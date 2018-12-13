@@ -21,6 +21,8 @@ class WeaklyMatcher implements Invocation {
     }
 
     /**
+     * This should return false if any other matchers exist in the invocation mocker
+     *
      * @param BaseInvocation $invocation
      *
      * @return bool
@@ -36,7 +38,7 @@ class WeaklyMatcher implements Invocation {
         /** @var InvocationMocker $invocationMocker */
         $invocationMocker = $this->mock->__phpunit_getInvocationMocker();
         $matchers = $invocationMocker->hasMatchers();
-        if($this->mock->getMatchers()){
+        if($invocationMocker->getMatchers()){
             return true;
         } else {
             return false;
